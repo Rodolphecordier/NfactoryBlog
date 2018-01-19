@@ -1,18 +1,19 @@
 <?php
 session_start();
-if (isset($_COOKIE['visite'])) {
-    setcookie('visite',   $_COOKIE['visite']+ 1 , time() + 365*24*3600);
-
-} else {
-    setcookie('visite', 1);
-
-}
 include_once ("./functions/callPage.php");
 ?>
 <?php
-var_dump($_COOKIE);
-echo($_COOKIE['visite']);
+if (isset($_COOKIE['visite'])) {
+    setCookie('visite', $_COOKIE['visite'] + 1 ,time() + 365*24*3600);
 
+} else {
+    setCookie('visite', 1 ,time() + 365*24*3600);
+
+}
+?>
+<?php
+
+echo ( "Ceci est votre ". $_COOKIE['visite'] ." visite !");
 
 ?>
 <!DOCTYPE html>

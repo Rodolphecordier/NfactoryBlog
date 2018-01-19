@@ -15,11 +15,10 @@
             echo("<li><a href=\"index.php?page=logout\">Logout</a></li>");
         }
         ?>
-
         <?php
-        if (isset($_SESSION['admin'])){
-            echo ("<li><a href=\"index.php?page=admin\">Administration </a></li>");
-        }
+            if (isset($_SESSION['admin'])){
+                echo ("<li><a href=\"index.php?page=admin\">Administration </a></li>");
+            }
         ?>
 
     </ul>

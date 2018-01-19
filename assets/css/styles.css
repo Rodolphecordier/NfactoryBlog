@@ -45,6 +45,8 @@ main{
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.4);
     margin: 0 500px;
+    font-size: 20px;
+    text-align: center;
 }
 
 form {
@@ -69,4 +71,15 @@ main {
 }
 form > div {
     margin: 5px 0;
+}
+td{
+    color: whitesmoke;
+    font-size: 25px;
+    padding-right: 25px ;
+
+}
+
+tr{
+    color: whitesmoke;
+    font-size: 25px;
 }
