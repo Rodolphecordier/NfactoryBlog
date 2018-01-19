@@ -16,6 +16,12 @@
         }
         ?>
 
+        <?php
+        if (isset($_SESSION['admin'])){
+            echo ("<li><a href=\"index.php?page=admin\">Administration </a></li>");
+        }
+        ?>
+
     </ul>
     <hr>
 </header>
