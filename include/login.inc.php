@@ -23,21 +23,22 @@ if (isset($_POST['login'])) {
         host=localhost;
         charsert=utf8";
         $username = "root";
-        $password = "";
+        $mdp = "";
 
-//$db = new PDO($dsn, $username, $password);
+
 
         try {
-            $db = new PDO($dsn, $username, $password);
+            $db = new PDO($dsn, $username, $mdp);
         } catch (PDOException $e) {
             echo($e->getMessage());
         }
         if (!$db) {
-            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+            echo("erreur connexion");
         } else {
             $password = sha1($password);
             $requete = "SELECT * FROM t_users WHERE USERMAIL='$mail' AND USERPASSWORD='$password'";
             if ($result = $db->query($requete)) {
+                var_dump($result);
                 $ligne = $result->rowCount();
                 if ($ligne > 0) {
                     $_SESSION['login'] = 1;

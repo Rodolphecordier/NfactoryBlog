@@ -21,7 +21,7 @@ if (isset($_SESSION['admin']) == 1){
         $reponse= $db ->query($sql);
         echo"<table>";
         while ($donnees= $reponse ->fetch(PDO::FETCH_ASSOC)){
-        echo("<tr>
+            echo("<tr>
                 <td>".$donnees['ID_USER']."</td>"
                 ."<td>".$donnees['USERNAME']."</td>"
                 ."<td>".$donnees['USERFNAME']."</td>"
