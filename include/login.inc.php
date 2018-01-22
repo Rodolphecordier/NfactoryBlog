@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>Login</h1>
 <?php
 if (isset($_POST['login'])) {
@@ -50,3 +51,6 @@ if (isset($_POST['login'])) {
 else {
     include ("./include/formLogin.php");
 }
+=======
+<h1>login</h1>
+>>>>>>> origin/develop
