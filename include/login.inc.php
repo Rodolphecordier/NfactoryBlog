@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <h1>Login</h1>
 <?php
 if (isset($_POST['login'])) {
@@ -19,38 +19,45 @@ if (isset($_POST['login'])) {
         include ("./include/formLogin.php");
     }
     else {
-        $connexion = mysqli_connect("localhost", "root", "", "nfactoryblog");
-        if (!$connexion) {
-            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+        $dsn = "mysql:dbname=nfactoryblog;
+        host=localhost;
+        charsert=utf8";
+        $username = "root";
+        $password = "";
+
+//$db = new PDO($dsn, $username, $password);
+
+        try {
+            $db = new PDO($dsn, $username, $password);
+        } catch (PDOException $e) {
+            echo($e->getMessage());
         }
-        else {
+        if (!$db) {
+            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+        } else {
             $password = sha1($password);
             $requete = "SELECT * FROM t_users WHERE USERMAIL='$mail' AND USERPASSWORD='$password'";
-            if($result = mysqli_query($connexion, $requete)) {
-                if (mysqli_num_rows($result) > 0) {
+            if ($result = $db->query($requete)) {
+                $ligne = $result->rowCount();
+                if ($ligne > 0) {
                     $_SESSION['login'] = 1;
-                    while ($donnees=mysqli_fetch_array($result)){
-                        if ($donnees['T_ROLES_ID_ROLE'] == 1 || $donnees['T_ROLES_ID_ROLE'] == 2){
-                            echo ("<script>redirection(\"index.php?page=admin\")</script>");
+                    while ($donnees = $result->fetch(PDO::FETCH_ASSOC)) {
+                        if ($donnees['T_ROLES_ID_ROLE'] == 1 || $donnees['T_ROLES_ID_ROLE'] == 2) {
+                            echo("<script>redirection(\"index.php?page=admin\")</script>");
                             $_SESSION['admin'] = 1;
-                        }else{
-                            echo ("<script>redirection(\"index.php?page=accueil\")</script>");
+                        } else {
+                            echo("<script>redirection(\"index.php?page=accueil\")</script>");
                         }
                     }
-
-                    echo ("<a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
-                }
-                else
+                    echo("<a href=\"index.php?page=accueil\">Vous êtes authentifié, viendez à la page d'accueil</a>");
+                } else
                     //$_SESSION['login'] = 0;
-                echo ("Votre e-mail ou mot de passe est érronné");
+                    echo("Votre e-mail ou mot de passe est érronné");
             }
         }
-        mysqli_close($connexion);
-    }
-}
+        unset($db);
+    }}
 else {
     include ("./include/formLogin.php");
 }
-=======
-<h1>login</h1>
->>>>>>> origin/develop
+

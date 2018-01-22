@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 session_start();
 include_once ("./functions/callPage.php");
@@ -19,15 +19,15 @@ echo ( "Ceci est votre ". $_COOKIE['visite'] ." visite !");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-=======
+
 <!DOCTYPE html>
 <html lang="en">
->>>>>>> origin/develop
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
+
     <link href="./assets/css/styles.css" type="text/css" rel="stylesheet" />
 
     <title>Blog</title>
@@ -50,43 +50,3 @@ echo ( "Ceci est votre ". $_COOKIE['visite'] ." visite !");
     </main>
     <?php include_once("./include/footer.php");?>
 </div>
-=======
-    <link rel="stylesheet" href="./assetes/CSS/normalize.css">
-    <link rel="stylesheet" href="./assetes/CSS/style.css">
-    <title>blog</title>
-</head>
-<body>
-    <?php
-    include_once("./include/header.php");
-  
-   ?>
-   
-    <main>
-    <?php
-if (isset($_GET['page']) && $_GET['page'] != "") {
-    $page = $_GET['page'];    
-}
-
-else {
-    $page = "default";
-}
-
-$page = "./include/" . $page . ".inc.php";
-
-$incFiles = glob("./include/*.inc.php");
-
-if(in_array($page, $incFiles)) {
-    include($page);
-}
-
-else {
-    include("./include/default.inc.php");
-}
-
-?>
-</main>
-<?php include_once("./include/footer.php");
-?>
->>>>>>> origin/develop
-</body>
-</html>

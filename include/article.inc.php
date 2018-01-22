@@ -25,9 +25,23 @@ if(isset($_POST["article"])) {
         echo($message);
         include("./include/FormArticle.php");
     } else {
-        $connexion = mysqli_connect("localhost", "root", "", "nfactoryblog");
+        $dsn = "mysql:dbname=nfactoryblog;
+        host=localhost;
+        charsert=utf8";
+        $username = "root";
+        $password = "";
+
+
+        try{
+            $db = new PDO($dsn, $username, $password);
+        }
+
+        catch (PDOException $e) {
+            echo ($e -> getMessage());
+        }
+
         if (!$connexion) {
-            die("Erreur MySQL " . mysqli_connect_errno() . " : " . mysqli_connect_error());
+           echo "erreur de connexion";
         }
         else {
             $message = addslashes(htmlentities($message , ENT_HTML5 , 'UTF-8'));
@@ -36,8 +50,8 @@ if(isset($_POST["article"])) {
             $requete = "INSERT INTO t_articles (ID_ARTICLE, ARTTITRE, ARTCHAPO,
                         ARTCONTENU, ARTDATE)
                         VALUES (NULL, '$titre', '$chapo', '$message', NOW());";
-            if($result = mysqli_query($connexion, $requete)) {
-                if (@mysqli_num_rows($result) > 0) {
+            if($result = $db ->query($sql)) {
+                if ($lignes = $result -> rowCount()) {
                     $_SESSION['login'] = 1;
 
                 }

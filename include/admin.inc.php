@@ -2,12 +2,26 @@
 if (isset($_SESSION['admin']) == 1){
 
     if($_SESSION['admin']==1) {
-        $connexion=mysqli_connect("localhost","root","","NFactoryBlog");
-        $requete = "SELECT * FROM t_users";
-        $result= mysqli_query($connexion,$requete);
+        $dsn = "mysql:dbname=nfactoryblog;
+        host=localhost;
+        charsert=utf8";
+        $username = "root";
+        $password = "";
+
+//$db = new PDO($dsn, $username, $password);
+
+        try{
+            $db = new PDO($dsn, $username, $password);
+        }
+
+        catch (PDOException $e) {
+            echo ($e -> getMessage());
+        }
+        $sql = "SELECT * FROM t_users";
+        $reponse= $db ->query($sql);
         echo"<table>";
-        while ($donnees=mysqli_fetch_array($result)){
-            echo("<tr>
+        while ($donnees= $reponse ->fetch(PDO::FETCH_ASSOC)){
+        echo("<tr>
                 <td>".$donnees['ID_USER']."</td>"
                 ."<td>".$donnees['USERNAME']."</td>"
                 ."<td>".$donnees['USERFNAME']."</td>"
