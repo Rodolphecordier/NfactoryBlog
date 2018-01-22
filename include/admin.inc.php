@@ -44,7 +44,7 @@ if (isset($_SESSION['admin']) == 1){
             $id=$_POST['id'];
             $choix=$_POST['select'];
             $requete2= "UPDATE t_users SET T_ROLES_ID_ROLE='$choix' WHERE ID_USER='$id'";
-            mysqli_query($connexion,$requete2);
+           $result2 = $db -> query($requete2);
         }
     } else {
         echo "erreur";
