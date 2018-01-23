@@ -2,21 +2,7 @@
 if (isset($_SESSION['admin']) == 1){
 
     if($_SESSION['admin']==1) {
-        $dsn = "mysql:dbname=nfactoryblog;
-        host=localhost;
-        charsert=utf8";
-        $username = "root";
-        $password = "";
-
-//$db = new PDO($dsn, $username, $password);
-
-        try{
-            $db = new PDO($dsn, $username, $password);
-        }
-
-        catch (PDOException $e) {
-            echo ($e -> getMessage());
-        }
+        $db = connexionPDO();
         $sql = "SELECT * FROM t_users";
         $reponse= $db ->query($sql);
         echo"<table>";

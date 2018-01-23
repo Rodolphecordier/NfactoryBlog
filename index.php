@@ -2,6 +2,8 @@
 <?php
 session_start();
 include_once ("./functions/callPage.php");
+include_once ("./function/connexion.php");
+include_once ("./function/query.php");
 ?>
 <?php
 if (isset($_COOKIE['visite'])) {

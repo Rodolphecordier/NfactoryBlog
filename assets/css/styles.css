@@ -1,6 +1,8 @@
 body {
     background :url("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-596521.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
 
 
 }

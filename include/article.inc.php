@@ -24,45 +24,28 @@ if(isset($_POST["article"])) {
         $message .= "</ul>";
         echo($message);
         include("./include/FormArticle.php");
-    } else {
-        $dsn = "mysql:dbname=nfactoryblog;
-        host=localhost;
-        charsert=utf8";
-        $username = "root";
-        $password = "";
+    } else {   $db = connexionPDO();
 
-
-        try{
-            $db = new PDO($dsn, $username, $password);
-        }
-
-        catch (PDOException $e) {
-            echo ($e -> getMessage());
-        }
-
-        if (!$connexion) {
-           echo "erreur de connexion";
+        if (!$db) {
+            echo "Erreur de connexion";
         }
         else {
             $message = addslashes(htmlentities($message , ENT_HTML5 , 'UTF-8'));
-            $chapo=addslashes(utf8_decode($chapo));
-            $titre=addslashes(utf8_decode($titre));
+            $chapo=addslashes(htmlentities($chapo));
+            $titre=addslashes(htmlentities($titre));
             $requete = "INSERT INTO t_articles (ID_ARTICLE, ARTTITRE, ARTCHAPO,
                         ARTCONTENU, ARTDATE)
                         VALUES (NULL, '$titre', '$chapo', '$message', NOW());";
-            if($result = $db ->query($sql)) {
-                if ($lignes = $result -> rowCount()) {
+            if($result = $db->query($requete)) {
+                if ($ligne = $result->rowCount() > 0) {
                     $_SESSION['login'] = 1;
-
                 }
                 else
                     $_SESSION['login'] = 0;
-
             }
-            mysqli_close($connexion);
+            unset($db);
         }
     }
-
 }else{
     include ("./include/FormArticle.php");
 }
